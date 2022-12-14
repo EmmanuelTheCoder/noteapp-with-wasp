@@ -1,0 +1,73 @@
+app waspBeta {
+  wasp: {
+    version: "^0.7.1"
+  },
+  title: "wasp-beta",
+
+auth: {
+  userEntity: User,
+  methods: {
+    usernameAndPassword: {}
+  },
+  onAuthFailedRedirectTo: "/login",
+  onAuthSucceededRedirectTo: "/notes"
+}
+}
+
+
+route RootRoute { path: "/", to: MainPage }
+page MainPage {
+  component: import Main from "@client/MainPage"
+}
+
+route NoteRoute {path: "/notes", to: BetaNote}
+page BetaNote {
+  authRequired: true,
+  component: import BetaNote from "@client/BetaNote"
+}
+
+route JoinRoute {path: "/join", to: JoinPage }
+page JoinPage {
+  component: import Join from "@client/Join"
+}
+
+route LoginRoute {path: "/login", to: Login}
+page Login{
+  component: import Login from "@client/Login"
+}
+route EditNoteRoute {path: "/edit", to: EditNote}
+page EditNote{
+  component: import EditNote from "@client/EditNote"
+}
+
+entity User {=psl 
+  id          Int     @id @default(autoincrement())
+  username    String  @unique
+  password    String
+  notes       Note[]
+
+psl=}
+entity Note {=psl 
+  id          Int   @id @default(autoincrement())
+  title       String
+  body        String
+  user        User @relation(fields: [userId], references: [id])
+  userId      Int
+  
+psl=}
+
+query getNote {
+  fn: import { getNote } from "@server/querynote.js",
+  entities: [Note]
+}
+
+
+
+action createNote {
+  fn: import {createNote} from "@server/actions.js",
+  entities: [Note]
+}
+action updateNote {
+  fn: import {updateNote} from "@server/actions.js",
+  entities: [Note]
+}
