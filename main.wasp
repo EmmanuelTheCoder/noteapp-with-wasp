@@ -71,3 +71,8 @@ action updateNote {
   fn: import {updateNote} from "@server/actions.js",
   entities: [Note]
 }
+
+action deleteNote {
+  fn: import {deleteNote} from "@server/actions.js",
+  entities: [Note]
+}

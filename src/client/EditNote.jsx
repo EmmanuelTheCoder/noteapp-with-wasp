@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {getNewNote} from './viewnote.jsx'
 import { Link, useHistory} from 'react-router-dom';
 import updateNote from "@wasp/actions/updateNote"
+import deleteNote from "@wasp/actions/deleteNote"
 
 
 
@@ -40,13 +41,27 @@ export default function EditNote() {
                 window.alert("An error occured: " + err)
             }
         }
+        const handleNoteDelete = async (e) =>{
+            e.preventDefault()
+            const getUserData = localStorage.getItem("userDetail");
+            const userData = JSON.parse(getUserData)
+            try{
+                await deleteNote({
+                    noteId: note.id,
+                    userId: userData.id
+                })
+                history.push("/notes")
+            } catch(err){
+                window.alert("An error occured: " + err)
+            }
+        }
         return(
             <div className='edit-note-container' key={note.id}>
 
                 <h3>{note.title}</h3>
                 <p>{note.body}</p>
                 <div className="buttons">
-                <button><img alt="delete" src="https://img.icons8.com/ios-glyphs/30/FA5252/trash--v1.png" />
+                <button onClick={handleNoteDelete}><img alt="remove note" src="https://img.icons8.com/ios-glyphs/30/FA5252/trash--v1.png" />
                 </button>
                 <button  onClick={()=> setIsTrue(!isTrue)}><img alt="edit" src="https://img.icons8.com/sf-black-filled/64/FD7E14/pencil.png"/></button>
                 <button>

@@ -10,11 +10,3 @@ export const getNote = async (args, context) => {
     })
 }
 
-// export const getSingleNote = async (args, context) =>{
-//     if(!context.user) {
-//         throw new HttpError(401)
-//     }
-//     return context.entities.Note.findUnique({
-//        where: {id: context.id} 
-//     })
-// }

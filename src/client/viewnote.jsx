@@ -14,10 +14,10 @@ const HandleFilter = (note, noteItem) => {
 
 const Note = ({note, user}) => {
     localStorage.setItem("userDetail", JSON.stringify(user))
-    //const [userNote, useUserNote] = useState([])
+
    return(
        <div className='view-note-parent'>
-
+        {!note?.length && <div style={{textAlign: 'center', fontSize: '1.2rem', margin: "4rem .2rem", color: 'red'}}> You don't have any not yet. Click the add button to add a note</div>}
     {note.map(items => {
         
         return(

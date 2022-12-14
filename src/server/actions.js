@@ -24,3 +24,12 @@ export const updateNote = async (args, context) => {
         data: {title: args.data.title, body: args.data.body}
     })
 }
+
+export const deleteNote = async (args, context) => {
+    if(!context.user){
+        throw new HttpError(401)
+    }
+    return context.entities.Note.deleteMany({
+        where: {id: args.noteId, user:{id: args.userId}}        
+    })
+}

@@ -26,10 +26,17 @@ export default function MainPage() {
               No more <span className="buzzword">I cannot recollect my thoughts</span>, document
               your thoughts on the go
             </p>
-            <Link to="/join">
-              <button>use BetaNotes</button>
-            
-            </Link>
+            <div className='style-btn'>
+              <Link to="/join">
+                <button>use BetaNotes</button>
+              
+              </Link>
+              <Link to="/notes">
+                <button>My notes</button>
+              
+              </Link>
+          </div>
+              
     </div>
     
   )
