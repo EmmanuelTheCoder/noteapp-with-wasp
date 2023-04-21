@@ -8,7 +8,7 @@ Run the following command in your terminal to install Wasp:
 curl -sSL https://get.wasp-lang.dev/installer.sh | sh
 ```
 
- > **Windows Users**
+ > **Note**
  > Wasp is currently not 100% compatible with Windows. The best way to use Wasp on Windows is through [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
  > Run the Wasp installation command after installing WSL on your Windows machine.
 
